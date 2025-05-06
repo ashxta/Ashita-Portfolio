@@ -1,118 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashita's Data Structures and Algorithms Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashita A | DAA Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffacd; /* Light Yellow */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ffb84d;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #d35400;
+      margin-top: 0;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    footer {
+      background-color: #e67300;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .gif-center {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    img {
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>WELCOME TO MY DSA PORTFOLIO</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#achievements">Achievements</a></li>
-                <li><a href="#hackerrank">Hackerrank Challenges</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Ashita A</h1>
+    <p>Design and Analysis of Algorithms Portfolio</p>
+    <nav>
+      <a href="#about">About</a> |
+      <a href="#topics">Topics Studied</a> |
+      <a href="#labs">Lab Experiments</a> |
+      <a href="#projects">Projects</a> |
+      <a href="#skills">Skills</a> |
+      <a href="#certifications">Certifications</a> |
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
+  <div class="container">
     <section id="about">
-        <h2>ABOUT ME</h2>
-        <p>Thank you for visiting my profile. I am Ashita, currently pursuing a BTech in Computer Science and Engineering from SRM Institute of Science and Technology, Kattankulathur. As an aspiring Data Analyst, I am committed to continuously enhancing my skills and knowledge to become a successful engineer.
+      <h2>About Me</h2>
+      <p>
+        Aspiring Data Analyst with a solid foundation in data analytics, business strategy, and problem-solving.
+        Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support
+        data-driven decision-making. Motivated by curiosity, resilience, and a passion for delivering impactful,
+        long-term solutions.
+      </p>
+      <div class="gif-center">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWU0ejc5a3pja3JyMTRqeHk5d2liYTNvcjZkZ2RodjIybXRuZHQxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ES4Vcv8zWfIt2/giphy.gif" alt="Data gif" width="30%">
+      </div>
+    </section>
 
-            My journey in computer science began in high school at Blue Bells Model School, Gurugram, where I built a strong foundation in Python. This early exposure to programming has been instrumental in shaping my passion for technology and data analysis. I am expanding my technical expertise by honing my web dev, SQL, Machine Learning, LLMS, Data Visualization,R, and Data Analysis skills.
-            
-            In addition to my formal education, I am actively pursuing various courses to broaden my knowledge and stay updated with industry trends. Recently, I completed the "SQL and Relational Databases 101" course from Cognitive Class, which has significantly deepened my understanding of SQL fundamentals and relational database concepts. These courses are essential in helping me acquire practical skills and theoretical knowledge necessary for a successful career in data analysis.
-            
-            Throughout my academic career, I have engaged in multiple projects, allowing me to apply my learning to real-world scenarios and gain hands-on experience. I am particularly interested in leveraging data to uncover insights and drive informed decision-making.
-            
-            I am always eager to learn and grow, seeking opportunities to collaborate on innovative projects and gain hands-on experience in the field of data analysis. My goal is to contribute effectively to the tech industry and make a meaningful impact through data-driven solutions.
-            
-            Let's connect and explore opportunities for collaboration, knowledge sharing, or career advancement in technology and data science.</p>
-        <img src="welcome.gif" alt="Welcome GIF" class="profile-gif">
+    <section id="topics">
+      <h2>Topics Studied in DAA</h2>
+      <ul>
+        <li>Insertion Sort, Bubble Sort</li>
+        <li>Linear Search, Binary Search</li>
+        <li>Merge Sort, Quick Sort</li>
+        <li>Strassen Matrix Multiplication</li>
+        <li>Finding Max/Min in Array, Convex Hull</li>
+        <li>Huffman Coding, Knapsack using Greedy</li>
+        <li>Longest Common Subsequence</li>
+        <li>N Queen’s Problem</li>
+        <li>Travelling Salesman Problem</li>
+        <li>Randomized Quick Sort</li>
+        <li>String Matching Algorithms</li>
+      </ul>
+    </section>
+
+    <section id="labs" class="lab-experiments">
+      <h2>Lab Experiments Done</h2>
+      <ul>
+        <li>Insertion Sort</li>
+        <li>Bubble Sort</li>
+        <li>Linear Search</li>
+        <li>Binary Search</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Strassen Matrix Multiplication</li>
+        <li>Finding Max and Min in an Array</li>
+        <li>Convex Hull Problem</li>
+        <li>Huffman Coding</li>
+        <li>Knapsack using Greedy</li>
+        <li>Longest Common Subsequence</li>
+        <li>N Queen’s Problem</li>
+        <li>Travelling Salesman Problem</li>
+        <li>Randomized Quick Sort</li>
+        <li>String Matching Algorithms</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong>HR Data Analysis & Attrition Prediction:</strong> Enabled a 5–7% reduction in predicted attrition through salary impact simulations, saving up to ₹50L annually. Built classification and clustering models.
+        </li>
+        <li>
+          <strong>Netflix Data Analysis:</strong> Found that 65% of top-performing shows came from 3 genres, improved localization strategy via visualization, and refined recommendation strategies.
+        </li>
+        <li>
+          <strong>Walmart Data Analysis:</strong> Improved holiday sales forecasting accuracy by 25%, correlated fuel prices with sales, and helped shift revenue focus.
+        </li>
+      </ul>
+      <div class="gif-center">
+        <img src="https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif" alt="Project gif" width="50%">
+      </div>
     </section>
 
     <section id="skills">
-        <h2>SKILLS</h2>
-        <ul>
-            <li><a href="#introduction">Introduction to C Programming</a></li>
-            <li><a href="#linked-lists">Linked Lists and Arrays</a></li>
-            <li><a href="#stacks-queues">Stacks and Queues</a></li>
-            <li><a href="#trees">Trees</a></li>
-            <li><a href="#graphs">Graphs</a></li>
-        </ul>
+      <h2>Skills</h2>
+      <ul>
+        <li><strong>Languages & Tools:</strong> Python (pandas, numpy, seaborn, scikit-learn), SQL, C/C++, Power BI, Excel</li>
+        <li><strong>Business Analytics:</strong> KPI Tracking, Strategic Reporting, Predictive Modeling, Dashboarding</li>
+        <li><strong>Data Handling:</strong> MySQL, Data Cleaning, Preprocessing, SMOTE, Feature Engineering</li>
+        <li><strong>Soft Skills:</strong> Client Collaboration, Critical Thinking, Stakeholder Communication, Insight Presentation</li>
+        <li><strong>Platforms:</strong> Jupyter, GitHub, IDLE, Google Colab, VS Code</li>
+      </ul>
     </section>
 
-    <section id="achievements">
-        <h2>ACHIEVEMENTS</h2>
-        <div class="achievement">
-            <h3>CHAPTERS LEARNT</h3>
-            <ul>
-                <li><a href="#introduction">Introduction to C Programming</a> - Theory of data structures, complexity, asymptotic notation, algorithm analysis, and recursion.</li>
-                <li><a href="#linked-lists">Linked Lists and Arrays</a> - Array operations, pointers, introduction to lists, and linked lists.</li>
-                <li><a href="#stacks-queues">Stacks and Queues</a> - Representation through arrays and lists, applications of stacks and queues.</li>
-                <li><a href="#trees">Trees</a> - Sorting algorithms, binary tree sort, searching techniques.</li>
-                <li><a href="#graphs">Graphs</a> - Traversal methods, spanning trees, shortest path algorithms.</li>
-            </ul>
-        </div>
-
-        <div class="achievement">
-            <h3>LAB EXPERIMENTS</h3>
-            <ul>
-                <li>Implementation of Structures</li>
-                <li>Matrix Multiplication - Dynamic Memory Allocation</li>
-                <li>Array Implementation of List</li>
-                <li>Linked List and Doubly Linked List Implementations</li>
-                <li>Stack and Queue using Array and Linked List</li>
-                <li>Tree and Graph Implementations</li>
-                <li>Shortest Path Algorithm and Minimum Spanning Tree</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="hackerrank">
-        <h2>HACKERRANK CHALLENGES</h2>
-        <ul>
-            <li><a href="https://www.hackerrank.com/challenges/arrays-ds/problem">Arrays - DS</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/2d-array/problem">2D Array - DS</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/dynamic-array/problem">Dynamic Array</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/array-left-rotation/problem">Left Rotation</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/sparse-arrays/problem">Sparse Arrays</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list/problem">Print the Elements of a Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/problem">Insert a Node at the Tail of a Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/insert-a-node-at-the-head-of-a-linked-list/problem">Insert a Node at the Head of a Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/insert-a-node-at-a-specific-position-in-a-linked-list/problem">Insert a Node at a Specific Position in a Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/delete-a-node/problem">Delete a Node</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list-in-reverse/problem">Print in Reverse</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/reverse-a-linked-list/problem">Reverse a Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/compare-two-linked-lists/problem">Compare Two Linked Lists</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/merge-two-sorted-linked-lists/problem">Merge Two Sorted Linked Lists</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/get-the-value-of-the-node-at-a-specific-position-from-the-tail/problem">Get Node Value</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/delete-duplicate-value-nodes-from-a-sorted-linked-list/problem">Delete Duplicate Nodes from Sorted List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/find-the-merge-point-of-two-joined-linked-lists/problem">Find Merge Point of Two Lists</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/insert-a-node-into-a-sorted-doubly-linked-list/problem">Insert Node into Sorted Doubly Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/problem">Reverse a Doubly Linked List</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/maximum-element/problem">Maximum Element</a></li>
-            <li><a href="https://www.hackerrank.com/challenges/queue-using-two-stacks/problem">Queue using Two Stacks</a></li>
-        </ul>
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <ul>
+        <li>Tata Data Visualisation: Empowering Business with Effective Insights</li>
+        <li>PwC Switzerland: Power BI</li>
+        <li>Google Data Analytics Certification</li>
+        <li>Oracle Cloud Infrastructure 2024 Certified Foundations Associate</li>
+        <li>Harvard CS50 Introduction to Python Programming</li>
+        <li>NPTEL Programming in Java</li>
+      </ul>
     </section>
 
     <section id="contact">
-        <h2>CONTACT</h2>
-        <p>If you have any questions or would like to collaborate, feel free to reach out!</p>
-        <ul>
-            <li>Email: <a href="mailto:youremail@example.com">aa1133@srmist.edu.in</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/ashita-602001282/" target="_blank">Visit LinkedIn Profile</a></li>
-            <li>GitHub: <a href="https://github.com/ashxta" target="_blank">Visit GitHub Profile</a></li>
-        </ul>
+      <h2>Contact</h2>
+      <p><strong>GitHub:</strong> <a href="https://github.com/ashxta" target="_blank">ashxta</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashita-a-602001282/" target="_blank">Ashita A</a></p>
     </section>
+  </div>
 
-    <footer>
-        <p>&copy; 2024 Ashita's Portfolio. All rights reserved.</p>
-    </footer>
+  <footer>
+    <p>© 2025 Ashita A. All rights reserved.</p>
+  </footer>
 </body>
+
 </html>
