@@ -1,95 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashita A | DAA Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ashita A | Data Analyst Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fffacd; /* Light Yellow */
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #ffb84d;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    section {
-      margin-bottom: 3rem;
-      background-color: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    section h2 {
-      color: #d35400;
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 1.5rem;
-    }
-
-    footer {
-      background-color: #e67300;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .gif-center {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    img {
-      border-radius: 10px;
-      max-width: 100%;
-      height: auto;
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-color: #fffacd;
     }
   </style>
 </head>
 
 <body>
+  <div id="particles-js"></div>
+
   <header>
     <h1>Ashita A</h1>
-    <p>Design and Analysis of Algorithms Portfolio</p>
+    <p>Aspiring Data Analyst | Portfolio</p>
     <nav>
       <a href="#about">About</a> |
-      <a href="#topics">Topics Studied</a> |
-      <a href="#labs">Lab Experiments</a> |
       <a href="#projects">Projects</a> |
       <a href="#skills">Skills</a> |
       <a href="#certifications">Certifications</a> |
@@ -101,63 +36,26 @@
     <section id="about">
       <h2>About Me</h2>
       <p>
-        Aspiring Data Analyst with a solid foundation in data analytics, business strategy, and problem-solving.
-        Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support
-        data-driven decision-making. Motivated by curiosity, resilience, and a passion for delivering impactful,
-        long-term solutions.
+        Aspiring Data Analyst with a strong foundation in data analytics, machine learning, and problem-solving.
+        Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support data-driven decisions.
+        Passionate about creating impactful solutions with curiosity, resilience, and clarity.
       </p>
       <div class="gif-center">
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWU0ejc5a3pja3JyMTRqeHk5d2liYTNvcjZkZ2RodjIybXRuZHQxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ES4Vcv8zWfIt2/giphy.gif" alt="Data gif" width="30%">
       </div>
     </section>
 
-    <section id="topics">
-      <h2>Topics Studied in DAA</h2>
-      <ul>
-        <li>Insertion Sort, Bubble Sort</li>
-        <li>Linear Search, Binary Search</li>
-        <li>Merge Sort, Quick Sort</li>
-        <li>Strassen Matrix Multiplication</li>
-        <li>Finding Max/Min in Array, Convex Hull</li>
-        <li>Huffman Coding, Knapsack using Greedy</li>
-        <li>Longest Common Subsequence</li>
-        <li>N Queen’s Problem</li>
-        <li>Travelling Salesman Problem</li>
-        <li>Randomized Quick Sort</li>
-        <li>String Matching Algorithms</li>
-      </ul>
-    </section>
-
-    <section id="labs" class="lab-experiments">
-      <h2>Lab Experiments Done</h2>
-      <ul>
-        <li>Insertion Sort</li>
-        <li>Bubble Sort</li>
-        <li>Linear Search</li>
-        <li>Binary Search</li>
-        <li>Merge Sort</li>
-        <li>Quick Sort</li>
-        <li>Strassen Matrix Multiplication</li>
-        <li>Finding Max and Min in an Array</li>
-        <li>Convex Hull Problem</li>
-        <li>Huffman Coding</li>
-        <li>Knapsack using Greedy</li>
-        <li>Longest Common Subsequence</li>
-        <li>N Queen’s Problem</li>
-        <li>Travelling Salesman Problem</li>
-        <li>Randomized Quick Sort</li>
-        <li>String Matching Algorithms</li>
-      </ul>
-    </section>
-
     <section id="projects">
       <h2>Projects</h2>
       <ul>
         <li>
-          <strong>HR Data Analysis & Attrition Prediction:</strong> Enabled a 5–7% reduction in predicted attrition through salary impact simulations, saving up to ₹50L annually. Built classification and clustering models.
+          <strong>HR Data Analysis & Attrition Prediction:</strong> Enabled 5–7% attrition reduction through simulations, saving ₹50L annually. Built classification and clustering models.
         </li>
         <li>
-          <strong>Netflix Data Analysis:</strong> Found that 65% of top-performing shows came from 3 genres, improved localization strategy via visualization, and refined recommendation strategies.
+          <strong>Netflix Data Analysis:</strong> Identified genre trends, improved localization strategy, and refined recommendation logic via visual analytics.
+        </li>
+        <li>
+          <strong>AI Powered Data Analyzer:</strong> Full-stack Streamlit tool for auto-cleaning, visualizing CSVs, and LLM-based insight generation using Zephyr API.
         </li>
         <li>
           <strong>Walmart Data Analysis:</strong> Improved holiday sales forecasting accuracy by 25%, correlated fuel prices with sales, and helped shift revenue focus.
@@ -171,10 +69,10 @@
     <section id="skills">
       <h2>Skills</h2>
       <ul>
-        <li><strong>Languages & Tools:</strong> Python (pandas, numpy, seaborn, scikit-learn), SQL, C/C++, Power BI, Excel</li>
+        <li><strong>Languages & Tools:</strong> Python (pandas, numpy, seaborn, scikit-learn), SQL, C/C++, Power BI, Excel, Streamlit, REST API</li>
         <li><strong>Business Analytics:</strong> KPI Tracking, Strategic Reporting, Predictive Modeling, Dashboarding</li>
         <li><strong>Data Handling:</strong> MySQL, Data Cleaning, Preprocessing, SMOTE, Feature Engineering</li>
-        <li><strong>Soft Skills:</strong> Client Collaboration, Critical Thinking, Stakeholder Communication, Insight Presentation</li>
+        <li><strong>Soft Skills:</strong> Client Collaboration, Critical Thinking, Public Speaking, Insight Presentation</li>
         <li><strong>Platforms:</strong> Jupyter, GitHub, IDLE, Google Colab, VS Code</li>
       </ul>
     </section>
@@ -193,6 +91,7 @@
 
     <section id="contact">
       <h2>Contact</h2>
+      <p><strong>Email:</strong> <a href="mailto:eeshosingh@gmail.com">eeshosingh@gmail.com</a></p>
       <p><strong>GitHub:</strong> <a href="https://github.com/ashxta" target="_blank">ashxta</a></p>
       <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashita-a-602001282/" target="_blank">Ashita A</a></p>
     </section>
@@ -201,6 +100,31 @@
   <footer>
     <p>© 2025 Ashita A. All rights reserved.</p>
   </footer>
-</body>
 
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100 },
+        size: { value: 3 },
+        color: { value: "#f4c542" },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffa500",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2
+        }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" }
+        }
+      }
+    });
+  </script>
+</body>
 </html>
