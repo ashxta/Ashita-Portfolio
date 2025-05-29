@@ -89,3 +89,20 @@ footer {
   text-align: center;
   padding: 1rem;
 }
+/* Badge Styles */
+.badges {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.badges span {
+  background-color: #ffcc80;
+  color: #333;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
