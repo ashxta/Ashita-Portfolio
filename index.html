@@ -96,8 +96,31 @@
     /* sections */
     section{margin-bottom:36px}
     .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-    .section-title h2{font-family:"Orbitron",sans-serif;font-weight:800;color:var(--neon-purple);margin:0;font-size:20px;background:linear-gradient(90deg,var(--neon-purple),var(--neon-cyan));-webkit-background-clip:text;color:transparent}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .section-title h2 {
+    font-family:"Orbitron",sans-serif;
+    font-weight:800;
+    margin:0;
+    font-size:20px;
+    background:linear-gradient(90deg,var(--neon-purple),var(--neon-cyan));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    position:relative;
+    padding-bottom:6px; /* space for underline */
+}
+
+.section-title h2::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:80px; /* underline length */
+  height:2px;
+  background:linear-gradient(90deg,var(--neon-purple),var(--neon-cyan));
+  box-shadow:0 0 8px rgba(0,240,255,0.6);
+  border-radius:2px;
+}
+
 
     /* cards */
     .card{background:var(--panel);border-radius:12px;padding:18px;border:1px solid var(--glass-border);box-shadow:0 8px 30px rgba(2,2,8,0.6);transition:transform .3s,box-shadow .3s}
