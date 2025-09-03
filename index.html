@@ -1,154 +1,573 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ashita A | Data Analyst Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ashita — Data Analyst | Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <meta name="theme-color" content="#060315" />
+
   <style>
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background-color: #fffacd;
+    :root{
+      --bg:#04030a;
+      --panel: rgba(22,18,34,0.62);
+      --neon-cyan:#00f0ff;
+      --neon-purple:#9c6bff;
+      --muted:#9aa0b4;
+      --glass-border: rgba(255,255,255,0.04);
+      --accent: linear-gradient(90deg,var(--neon-purple),var(--neon-cyan));
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      background: radial-gradient(ellipse at 10% 10%, rgba(12,6,30,1) 0%, rgba(3,2,12,1) 40%, #02010a 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      line-height:1.45;
+    }
+
+    /* Canvas background */
+    #bg-canvas{position:fixed;inset:0;z-index:0;width:100%;height:100%;display:block}
+
+    /* subtle grid overlay */
+    .grid-overlay{
+      position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:
+        linear-gradient(transparent 95%, rgba(255,255,255,0.02) 95%),
+        linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.02) 95%);
+      background-size: 120px 120px, 120px 120px;
+      mix-blend-mode:overlay;opacity:0.6;
+    }
+
+    /* Header */
+    header{
+      position:fixed;top:18px;left:50%;transform:translateX(-50%);
+      z-index:40;width:min(1100px,94%);display:flex;justify-content:space-between;align-items:center;
+      padding:12px 18px;border-radius:14px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid var(--glass-border);backdrop-filter: blur(8px);
+      box-shadow:0 6px 30px rgba(2,2,8,0.6);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{font-family:"Orbitron",sans-serif;font-weight:800;color:var(--neon-cyan);font-size:18px;display:flex;gap:10px;align-items:center}
+    .logo .dot{width:10px;height:10px;border-radius:3px;background:var(--neon-purple);box-shadow:0 0 12px var(--neon-purple)}
+    nav ul{display:flex;gap:16px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;padding:8px 10px;border-radius:8px;transition:all .25s ease}
+    nav a:hover{color:var(--neon-cyan);transform:translateY(-3px)}
+    .cta{background:var(--accent);padding:8px 14px;border-radius:10px;color:#02010a;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 6px 20px rgba(156,107,255,0.12)}
+
+    /* Main container */
+    .wrap{position:relative;z-index:10;width:min(1100px,94%);margin:120px auto 90px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center;margin-bottom:48px}
+    .hero-card{background:var(--panel);border-radius:16px;padding:28px;border:1px solid rgba(156,107,255,0.12);box-shadow:0 10px 40px rgba(2,2,8,0.6);position:relative;overflow:visible}
+    .name{font-family:"Orbitron",sans-serif;font-weight:800;font-size:42px;letter-spacing:0.6px;margin:0 0 6px;background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .sub{color:var(--muted);margin-bottom:14px;font-weight:600}
+    .hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    .chip{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:13px;color:var(--muted)}
+    .hero-para{color:#cfe8ff;line-height:1.6;margin-bottom:18px}
+    .hero-actions{display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:999px;border:none;font-weight:700;cursor:pointer;font-size:14px;letter-spacing:0.4px;transition:all .2s ease;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+    .btn-primary{background:var(--neon-cyan);color:#040312;box-shadow:0 8px 24px rgba(0,240,255,0.08)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--neon-cyan)}
+
+    /* Visual stage (right) */
+    .card-visual{height:100%;display:flex;align-items:center;justify-content:center;position:relative;padding:20px}
+    .visual-stage{width:380px;height:420px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;box-shadow:0 20px 60px rgba(4,2,14,0.6)}
+
+    .cube{position:absolute;width:96px;height:96px;border-radius:10px;background: linear-gradient(145deg, rgba(156,107,255,0.18), rgba(0,240,255,0.06));border:1px solid rgba(156,107,255,0.08);backdrop-filter: blur(6px);display:flex;align-items:center;justify-content:center;transform-style: preserve-3d;box-shadow:0 14px 40px rgba(0,0,0,0.6);animation: floaty 6s ease-in-out infinite}
+    .cube .icon{font-size:26px;color:var(--neon-cyan);opacity:0.95}
+    .cube.small{width:68px;height:68px;border-radius:10px;animation-duration:5.6s}
+    .cube.left{left:20px;top:40px}
+    .cube.center{left:140px;top:90px}
+    .cube.right{right:18px;top:60px}
+    @keyframes floaty{0%{transform:translateY(0) rotateX(0) rotateY(0)}50%{transform:translateY(-18px) rotateX(8deg) rotateY(6deg)}100%{transform:translateY(0) rotateX(0) rotateY(0)}}
+    .spark{position:absolute;width:160px;height:2px;top:340px;left:110px;opacity:0.8;background: linear-gradient(90deg, rgba(156,107,255,0.0), rgba(156,107,255,0.7), rgba(0,240,255,0.3));transform-origin:left center;animation: slide 2.2s linear infinite}
+    @keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(160%)}}
+
+    /* sections */
+    section{margin-bottom:36px}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .section-title h2{font-family:"Orbitron",sans-serif;font-weight:800;color:var(--neon-purple);margin:0;font-size:20px;background:linear-gradient(90deg,var(--neon-purple),var(--neon-cyan));-webkit-background-clip:text;color:transparent}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+
+    /* cards */
+    .card{background:var(--panel);border-radius:12px;padding:18px;border:1px solid var(--glass-border);box-shadow:0 8px 30px rgba(2,2,8,0.6);transition:transform .3s,box-shadow .3s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 26px 60px rgba(0,0,0,0.6)}
+    .muted{color:var(--muted);font-size:13px}
+    .big{font-size:20px;font-weight:700;margin-bottom:6px;color:#eaf4ff}
+    .skills-list{display:flex;flex-wrap:wrap;gap:10px}
+    .pill{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:13px;color:var(--muted)}
+
+    /* projects */
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(156,107,255,0.06)}
+    .project h3{margin:0 0 6px;font-family:"Orbitron",sans-serif;font-size:16px;color:var(--neon-cyan)}
+    .project p{color:#cde3ff;font-size:13px;line-height:1.45}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(0,240,255,0.04);color:var(--neon-cyan);border:1px solid rgba(0,240,255,0.06)}
+
+    .vertical{display:flex;flex-direction:column;gap:12px}
+
+    /* contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .contact-info{display:flex;flex-direction:column;gap:14px}
+    .icon-round{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .contact-row{display:flex;gap:12px;align-items:center}
+
+    footer{margin-top:36px;padding:24px;border-radius:10px;text-align:center;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+
+    /* responsive */
+    @media (max-width:1100px){.hero{grid-template-columns:1fr 360px}.project-grid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+    @media (max-width:800px){
+      header{left:12px;right:12px;transform:none}
+      .wrap{margin-top:140px;width:94%}
+      .hero{grid-template-columns:1fr;gap:18px}
+      .visual-stage{width:100%;height:240px}
+      .project-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    /* reveal */
+    .reveal{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
+    .reveal.show{opacity:1;transform:translateY(0)}
   </style>
 </head>
-
 <body>
-  <div id="particles-js"></div>
+  <!-- Canvas background -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="grid-overlay" aria-hidden="true"></div>
 
+  <!-- Header -->
   <header>
-    <h1>Ashita A</h1>
-    <p>Aspiring Data Analyst | Portfolio</p>
+    <div class="brand">
+      <div class="logo"><span class="dot"></span>Ashita</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Data Analyst • ML • Visualization</div>
+    </div>
+
     <nav>
-      <a href="#about">About</a> |
-      <a href="#projects">Projects</a> |
-      <a href="#skills">Skills</a> |
-      <a href="#certifications">Certifications</a> |
-      <a href="#contact">Contact</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#extras">Extras</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+
+    <a class="cta" href="https://drive.google.com/file/d/1Wa1nkFXim6pDAG2fQXJfEU3nan1epI7D/view?usp=sharing" target="_blank" rel="noopener">Download Resume</a>
   </header>
 
-  <div class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        Aspiring Data Analyst with a strong foundation in data analytics, machine learning, and problem-solving.
-        Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support data-driven decisions.
-        Passionate about creating impactful solutions with curiosity, resilience, and clarity.
-      </p>
-      <div class="gif-center">
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWU0ejc5a3pja3JyMTRqeHk5d2liYTNvcjZkZ2RodjIybXRuZHQxcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ES4Vcv8zWfIt2/giphy.gif" alt="Data gif" width="30%">
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-card reveal" id="hero-left">
+        <h1 class="name">ASHITA</h1>
+        <div class="sub">Data Analyst — SQL · Python · Power BI · ML</div>
+
+        <div class="hero-meta">
+          <div class="chip">SRM Institute of Science &amp; Technology</div>
+          <div class="chip">BTech CSE (2023–2027)</div>
+          <div class="chip">CGPA: 8.71</div>
+        </div>
+
+        <p class="hero-para">
+          Data Analyst with a foundation in data analytics, machine learning, and problem-solving.
+          Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support data-driven decision-making.
+          Motivated by curiosity, resilience, and a passion for delivering impactful, long-term solutions.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/ashxta" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+          <a class="btn btn-ghost" href="mailto:eeshosingh@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+
+        <div style="margin-top:16px;color:var(--muted);font-size:13px">
+          <strong>Phone:</strong> +91 8218694843 &nbsp; • &nbsp;
+          <strong>Email:</strong> <a href="mailto:eeshosingh@gmail.com" style="color:var(--neon-cyan);text-decoration:none">eeshosingh@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- Visual stage -->
+      <div class="card-visual reveal" id="hero-right">
+        <div class="visual-stage" role="img" aria-label="abstract 3d data cubes">
+          <div class="cube left small"><i class="fas fa-database icon"></i></div>
+          <div class="cube center"><i class="fas fa-chart-line icon"></i></div>
+          <div class="cube right small"><i class="fas fa-robot icon"></i></div>
+          <div class="spark" aria-hidden="true"></div>
+        </div>
       </div>
     </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <ul>
-    <li>
-      <strong><a href="https://github.com/ashxta/AI-Data-Insight" target="_blank">AI Powered Data Analyzer</a>:</strong>
-      A Streamlit app for automated CSV cleaning, visualization, and LLM-generated summaries via Zephyr-7B API.
-      <div class="badges">
-        <span>Python</span><span>Streamlit</span><span>HuggingFace</span><span>Zephyr-7B</span>
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <div class="section-title">
+        <h2>About</h2>
+        <div style="color:var(--muted);font-weight:600">Professional Summary</div>
       </div>
-    </li>
-    <li>
-      <strong><a href="https://github.com/ashxta/HR-Data-Analytics-ML" target="_blank">HR Data Analysis & Attrition Prediction</a>:</strong>
-      Reduced attrition by 5–7% using classification and clustering models. Built department-wise risk predictors.
-      <div class="badges">
-        <span>Python</span><span>pandas</span><span>scikit-learn</span><span>SMOTE</span>
-      </div>
-    </li>
-    <li>
-      <strong><a href="https://github.com/ashxta/Netflix-Data-Analysis" target="_blank">Netflix Data Analysis</a>:</strong>
-      Analyzed global streaming trends, genre patterns, and regional gaps to refine content strategy.
-      <div class="badges">
-        <span>Python</span><span>Power BI</span><span>MySQL</span><span>Matplotlib</span>
-      </div>
-    </li>
-    <li>
-      <strong><a href="https://github.com/ashxta/Walmart-Data-Analysis" target="_blank">Walmart Sales Data Analysis</a>:</strong>
-      Improved forecasting by 25%, correlated sales with external factors like holidays and fuel prices.
-      <div class="badges">
-        <span>Python</span><span>pandas</span><span>seaborn</span>
-      </div>
-    </li>
-    <li>
-      <strong><a href="https://github.com/ashxta/Hospital-Management" target="_blank">Hospital Management System</a>:</strong>
-      A modular CLI-based hospital system built in Python using MySQL for database operations. Supports add/update/delete/display for patients, doctors, nurses, pharmacy, and wards. Includes error handling and validation.
-      <div class="badges">
-        <span>Python</span><span>MySQL</span><span>mysql.connector</span><span>CRUD</span>
-      </div>
-    </li>
-  </ul>
-  <div class="gif-center">
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHY2eHBmemxrdm12MHE0eWZrb3VwczU1ZWtscWFqcnZia3Y2dGV0MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BbmDhO2gx3o96CpVM1/giphy.gif" alt="Project gif" width="50%">
-  </div>
-</section>
 
+      <div class="grid">
+        <div class="card">
+          <div class="big">Professional Summary</div>
+          <div class="muted">Data Analyst | Analytics · ML · Visualization</div>
+          <p style="color:#cfe8ff;margin-top:8px">
+            Data Analyst with a foundation in data analytics, machine learning, and problem-solving. Proficient in SQL, Power BI, and Python, with experience generating actionable insights to support data-driven decision-making. Motivated by curiosity, resilience, and a passion for delivering impactful, long-term solutions.
+          </p>
+        </div>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li><strong>Languages & Tools:</strong> Python (pandas, numpy, seaborn, scikit-learn), SQL, C/C++, Power BI, Excel, Streamlit, REST API</li>
-        <li><strong>Business Analytics:</strong> KPI Tracking, Strategic Reporting, Predictive Modeling, Dashboarding</li>
-        <li><strong>Data Handling:</strong> MySQL, Data Cleaning, Preprocessing, SMOTE, Feature Engineering</li>
-        <li><strong>Soft Skills:</strong> Client Collaboration, Critical Thinking, Public Speaking, Insight Presentation</li>
-        <li><strong>Platforms:</strong> Jupyter, GitHub, IDLE, Google Colab, VS Code</li>
-      </ul>
+        <div class="card">
+          <div class="big">Contact & Links</div>
+          <div class="muted">Reach out or view work</div>
+          <div style="margin-top:12px">
+            <div style="margin-bottom:8px"><strong>Email:</strong> <a href="mailto:eeshosingh@gmail.com" style="color:var(--neon-cyan);text-decoration:none">eeshosingh@gmail.com</a></div>
+            <div style="margin-bottom:8px"><strong>Phone:</strong> +91 8218694843</div>
+            <div style="margin-bottom:8px"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashita-a-602001282/" target="_blank" rel="noopener" style="color:var(--neon-cyan)">linkedin.com/in/ashita-a-602001282</a></div>
+            <div style="margin-bottom:8px"><strong>GitHub:</strong> <a href="https://github.com/ashxta" target="_blank" rel="noopener" style="color:var(--neon-cyan)">github.com/ashxta</a></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <ul>
-        <li>Tata Data Visualisation: Empowering Business with Effective Insights</li>
-        <li>PwC Switzerland: Power BI</li>
-        <li>Google Data Analytics Certification</li>
-        <li>Oracle Cloud Infrastructure 2024 Certified Foundations Associate</li>
-        <li>Harvard CS50 Introduction to Python Programming</li>
-        <li>NPTEL Programming in Java</li>
-      </ul>
+    <!-- SKILLS -->
+    <section id="skills" class="reveal">
+      <div class="section-title">
+        <h2>Technical Skills</h2>
+        <div style="color:var(--muted);font-weight:600">Languages, tools & expertise</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="big">Languages &amp; Tools</div>
+          <div class="muted">Primary languages and developer tools</div>
+          <div style="margin-top:12px" class="skills-list">
+            <span class="pill">Python</span>
+            <span class="pill">C / C++</span>
+            <span class="pill">Java</span>
+            <span class="pill">SQL</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">HTML / CSS</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="big">Frameworks &amp; Tools</div>
+          <div class="muted">Libraries, frameworks & platforms</div>
+          <div style="margin-top:12px" class="skills-list">
+            <span class="pill">Flask</span>
+            <span class="pill">Streamlit</span>
+            <span class="pill">REST APIs</span>
+            <span class="pill">Git</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">Power BI</span>
+            <span class="pill">Excel</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="big">Data Handling</div>
+          <div class="muted">Data cleaning, preprocessing & modeling</div>
+          <div style="margin-top:12px" class="skills-list">
+            <span class="pill">Data Cleaning</span>
+            <span class="pill">Preprocessing</span>
+            <span class="pill">SMOTE</span>
+            <span class="pill">Feature Engineering</span>
+            <span class="pill">MySQL (DB)</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="big">Soft Skills & Platforms</div>
+          <div class="muted">Communication, collaboration & tooling</div>
+          <div style="margin-top:12px" class="skills-list">
+            <span class="pill">Client Collaboration</span>
+            <span class="pill">Critical Thinking</span>
+            <span class="pill">Public Speaking</span>
+            <span class="pill">Insight Presentation</span>
+            <span class="pill">Jupyter</span>
+            <span class="pill">GitHub</span>
+            <span class="pill">Google Colab</span>
+            <span class="pill">VS Code</span>
+            <span class="pill">IDLE</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p><strong>Email:</strong> <a href="mailto:eeshosingh@gmail.com">eeshosingh@gmail.com</a></p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/ashxta" target="_blank">ashxta</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashita-a-602001282/" target="_blank">Ashita A</a></p>
-    </section>
-  </div>
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <div style="color:var(--muted);font-weight:600">Selected work & links</div>
+      </div>
 
-  <footer>
-    <p>© 2025 Ashita A. All rights reserved.</p>
-  </footer>
+      <div class="project-grid" style="margin-bottom:10px">
+        <div class="project card">
+          <h3>HR Data Analysis &amp; Attrition Prediction</h3>
+          <p>Designed predictive models that reduced projected HR replacement costs by ₹50L annually by simulating salary and retention strategies. Applied classification and clustering algorithms to identify at-risk employees and supported workforce planning. Delivered department-level risk analysis and predictive alert systems using classification and clustering models.</p>
+          <div class="tags" style="margin-top:10px">
+            <span class="tag">Python</span>
+            <span class="tag">pandas</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">SMOTE</span>
+            <span class="tag">MySQL</span>
+          </div>
+          <div style="margin-top:10px"><a href="https://github.com/ashxta/HR-Data-Analytics-ML" target="_blank" class="btn btn-ghost" style="font-size:13px">View Code</a></div>
+        </div>
+
+        <div class="project card">
+          <h3>AI Powered Data Analyzer</h3>
+          <p>Built a data analysis tool automating cleaning and visualization, reducing manual reporting by 60%. Integrated Zephyr-7B (LLM) via Hugging Face API to produce concise, data-driven summaries from user-uploaded CSVs. Built a modular dashboard with interactive tabs for histograms, scatter plots, correlation heatmaps, and custom XY plotting.</p>
+          <div class="tags" style="margin-top:10px">
+            <span class="tag">Streamlit</span>
+            <span class="tag">LLM</span>
+            <span class="tag">Python</span>
+          </div>
+          <div style="margin-top:10px"><a href="https://ai-data-insight.streamlit.app/" target="_blank" class="btn btn-ghost" style="font-size:13px">Live Demo</a></div>
+        </div>
+
+        <div class="project card">
+          <h3>Netflix Data Analysis</h3>
+          <p>Analyzed over 1,000 records to identify that 65% of top-performing shows belonged to three specific genres, which directly guided and informed a new investment strategy. Identified regional content gaps that supported improved localization and user engagement strategies. Built executive-level dashboards for senior decision-makers to visualize content performance and audience trends.</p>
+          <div class="tags" style="margin-top:10px"><span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">MySQL</span></div>
+          <div style="margin-top:10px"><a href="https://github.com/ashxta/Netflix-Data-Analysis" target="_blank" class="btn btn-ghost" style="font-size:13px">View Repo</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="reveal">
+      <div class="section-title">
+        <h2>Education</h2>
+        <div style="color:var(--muted);font-weight:600">Formal education</div>
+      </div>
+
+      <div class="grid">
+        <div class="card vertical">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="big">SRM Institute of Science and Technology</div>
+              <div class="muted">BTech in Computer Science and Engineering</div>
+              <div class="muted" style="margin-top:6px">August 2023 — May 2027</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:800;color:var(--neon-cyan);font-size:18px">CGPA: 8.71/10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card vertical">
+          <div class="big">Academic Notes</div>
+          <div class="muted">Current status</div>
+          <p style="color:#cfe8ff">CGPA 8.71 (till 4th semester). Pursuing coursework in data structures, algorithms, machine learning and data science-related subjects.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTRAS & CERTIFICATIONS -->
+    <section id="extras" class="reveal">
+      <div class="section-title">
+        <h2>Extracurriculars &amp; Certifications</h2>
+        <div style="color:var(--muted);font-weight:600">Hackathons, volunteering & certified skills</div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="big">Extracurriculars</div>
+          <div class="muted">Hackathons & community work</div>
+          <div style="margin-top:8px;color:#cfe8ff">
+            • Built a health-tech MVP shortlisted at Hack4Bihar 2025 — teamwork, product scoping, and rapid prototyping.<br>
+            • National semi-finalist at Flipkart GRiD 7.0.<br>
+            • NGO service with Choti Si Asha: taught tailoring & entrepreneurship to underprivileged women.<br>
+            • Leadership roles: managed outreach and sponsorship for SRM MUN, E-Cell, and dBug Labs.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="big">Certifications</div>
+          <div class="muted">Professional training & credentials</div>
+          <div style="margin-top:8px" class="skills-list">
+            <span class="pill">Google Data Analytics</span>
+            <span class="pill">Tata Data Visualization</span>
+            <span class="pill">Oracle Cloud Infrastructure Foundations</span>
+            <span class="pill">CS50 Python</span>
+            <span class="pill">NPTEL Java</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <div style="color:var(--muted);font-weight:600">Let's connect</div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card contact-info">
+          <div class="contact-row">
+            <div class="icon-round"><i class="fas fa-envelope" style="color:var(--neon-cyan)"></i></div>
+            <div>
+              <div class="big">Email</div>
+              <div class="muted">eeshosingh@gmail.com</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="icon-round"><i class="fas fa-phone" style="color:var(--neon-purple)"></i></div>
+            <div>
+              <div class="big">Phone</div>
+              <div class="muted">+91 8218694843</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div class="icon-round"><i class="fas fa-map-marker-alt" style="color:var(--neon-cyan)"></i></div>
+            <div>
+              <div class="big">Location</div>
+              <div class="muted">Gurgaon / SRM (India)</div>
+            </div>
+          </div>
+
+          <div style="margin-top:8px">
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/ashita-a-602001282/" target="_blank">LinkedIn</a>
+            <a class="btn btn-ghost" href="https://github.com/ashxta" target="_blank">GitHub</a>
+            <a class="btn btn-ghost" href="https://ai-data-insight.streamlit.app/" target="_blank">Live Demo</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="big">Quick Message</div>
+          <div class="muted">Prefer email — or use the quick form below</div>
+          <form onsubmit="event.preventDefault(); alert('Thanks — message simulated. Use mailto: or the email link to contact.');" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+            <input required placeholder="Your name" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--neon-cyan)">
+            <input required placeholder="Your email" type="email" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--neon-cyan)">
+            <textarea required placeholder="Message" rows="5" style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--neon-cyan)"></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="font-weight:700;color:var(--neon-purple)">Ashita — Data Analyst</div>
+      <div style="margin-top:8px">Built with ♥ • <a href="https://github.com/ashxta" style="color:var(--neon-cyan)">GitHub</a> • © 2025</div>
+    </footer>
+  </main>
 
   <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 100 },
-        size: { value: 3 },
-        color: { value: "#f4c542" },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ffa500",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2
-        }
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "repulse" }
+    /* Canvas particle background (lightweight) */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let w = canvas.width = innerWidth;
+    let h = canvas.height = innerHeight;
+    const particles = [];
+    const PARTICLE_COUNT = Math.floor(Math.min(160, (w*h)/10000));
+
+    function rand(min, max){ return Math.random()*(max-min)+min }
+    function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; initParticles(); }
+    addEventListener('resize', resize);
+
+    class P {
+      constructor(){ this.reset(); }
+      reset(){
+        this.x = Math.random()*w;
+        this.y = Math.random()*h;
+        this.r = rand(0.6, 2.2);
+        this.vx = rand(-0.15, 0.15);
+        this.vy = rand(-0.15, 0.15);
+        this.alpha = rand(0.05, 0.9);
+        this.phase = Math.random()*Math.PI*2;
+      }
+      step(t){
+        this.x += this.vx + Math.cos(t/1000 + this.phase)*0.08;
+        this.y += this.vy + Math.sin(t/1200 + this.phase)*0.08;
+        if (this.x < -20 || this.x > w+20 || this.y < -20 || this.y > h+20) this.reset();
+      }
+      draw(){
+        ctx.save();
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r*6);
+        g.addColorStop(0, `rgba(0,240,255,${this.alpha})`);
+        g.addColorStop(0.5, `rgba(156,107,255,${this.alpha*0.4})`);
+        g.addColorStop(1, `rgba(2,4,12,0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r*6, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function initParticles(){
+      particles.length = 0;
+      for(let i=0;i<PARTICLE_COUNT;i++) particles.push(new P());
+    }
+    initParticles();
+
+    let mouse = {x:-1000,y:-1000};
+    window.addEventListener('mousemove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; })
+    window.addEventListener('mouseout', ()=>{ mouse.x=-1000; mouse.y=-1000; })
+
+    function frame(t){
+      ctx.clearRect(0,0,w,h);
+      const vg = ctx.createLinearGradient(0,0,0,h);
+      vg.addColorStop(0, 'rgba(2,2,8,0.12)');
+      vg.addColorStop(1, 'rgba(2,2,8,0.35)');
+      ctx.fillStyle = vg; ctx.fillRect(0,0,w,h);
+
+      for(const p of particles){
+        p.step(t);
+        p.draw();
+        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 140){
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, 0.9 - d/140);
+          ctx.strokeStyle = 'rgba(0,240,255,0.08)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+          ctx.restore();
         }
       }
-    });
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    /* reveal on scroll */
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){ ent.target.classList.add('show'); obs.unobserve(ent.target); }
+      })
+    }, {threshold:0.12});
+    reveals.forEach(r => obs.observe(r));
+
+    /* subtle cube animation */
+    (function animateCubes(){
+      const cubes = document.querySelectorAll('.cube');
+      let rot = 0;
+      function tick(){
+        rot += 0.6;
+        cubes.forEach((c,i)=>{
+          const r = rot + i*12;
+          c.style.transform = `translateY(${Math.sin((r + i*20)/10)*8}px) rotateZ(${r/6}deg)`;
+        });
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
   </script>
 </body>
 </html>
